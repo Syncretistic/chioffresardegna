@@ -19,9 +19,9 @@
       ul.nav.navbar-nav.ml-auto
         if !user
           li.nav-item(class=(title === 'New Post') ? 'active' : undefined)
-            a.nav-link(href='/newpost') New Post
+            a.nav-link(href='/post/new') New Post
           li.nav-item(class=(title === 'My Blog') ? 'active' : undefined)
-            a.nav-link(href='/userblog') My Blog
+            a.nav-link(href='/blog') My Blog
           li.nav-item(class=(title === 'Login') ? 'active' : undefined)
             a.nav-link(href='/login') Login
           li.nav-item(class=(title === 'Create Account') ? 'active' : undefined)

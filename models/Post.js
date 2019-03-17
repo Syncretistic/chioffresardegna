@@ -13,9 +13,9 @@ const postSchema = new mongoose.Schema({
     }
 }, { timestamps: true });
 
-postSchema.methods.createPost = function createPost(title, content, author){};
-postSchema.methods.modifyPost = function createPost(post){};
-postSchema.methods.deletePost = function createPost(post){};
+// postSchema.methods.createPost = function createPost(title, content, author){};
+// postSchema.methods.modifyPost = function modifyPost(post){};
+// postSchema.methods.deletePost = function deletePost(post){};
 
 const Post = mongoose.model('Post', postSchema);
 
