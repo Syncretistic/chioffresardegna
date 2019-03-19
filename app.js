@@ -89,7 +89,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
-app.use((req, res, next) => {
+/*app.use((req, res, next) => {
   if (req.path === '/api/upload') {
     next();
   } else {
@@ -97,7 +97,7 @@ app.use((req, res, next) => {
   }
 });
 app.use(lusca.xframe('SAMEORIGIN'));
-app.use(lusca.xssProtection(true));
+app.use(lusca.xssProtection(true));*/
 app.disable('x-powered-by');
 app.use((req, res, next) => {
   res.locals.user = req.user;
@@ -145,7 +145,7 @@ app.post('/post/new', postController.postNewPost);
 // app.post('/post/edit', postController.postEditPost);
 // app.get('/post/delete', postController.getDeletePost);
 // app.post('/post/delete', postController.postDeletePost);
-app.get('/blog', postController.getBlog);
+app.get('/blog/:id', postController.getBlog);
 app.get('/contact', contactController.getContact);
 app.post('/contact', contactController.postContact);
 app.get('/account', passportConfig.isAuthenticated, userController.getAccount);

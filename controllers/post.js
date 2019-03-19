@@ -1,15 +1,19 @@
 const Post = require('../models/Post');
-
 /**
  * GET /post/new
  * Create new blog post page.
  */
 exports.getBlog = (req, res) => {
     const unknownUser = !(req.user);
+    if (unknownUser){
+        res.redirect('/');
+    }
+    const userId = (req.params.id) ? req.params.id : req.user.id;
+    Post.find({author: userId})
 
     res.render('blog', {
         title: 'User Blog',
-        unknownUser,
+        userBlog,
     });
 };
 
@@ -29,24 +33,25 @@ exports.getNewPost = (req, res) => {
 exports.postNewPost = (req, res, next) => {
     req.sanitizeBody('content');
     req.sanitizeBody('title');
-    req.assert('content', 'Your blog post is empty!').trim().isEmpty();
-    req.assert('title', 'You need a title!').trim().isEmpty();
+    // req.assert('content', 'Your blog post is empty!').
+    // req.assert('title', 'You need a title!').trim().isNotEmpty();
     const errors = req.validationErrors();
-
     if (errors) {
-        req.flash('errors', errors);
-        return res.redirect('/newpost');
+        console.log(errors);
+        req.flash('error', errors);
+        return res.redirect('/post/new');
     }
     const post = new Post({
         title: req.body.title,
         content: req.body.content,
         author: req.user
     });
+
     post.save((err) => {
+        console.log('dove sono');
         if (err) { return next(err); }
         req.flash('success', { msg: 'Success! New post created!' });
-            res.redirect('/blog');
-
+        res.redirect('/post/new');
     });
     // User.findById(req.user.id, (err, user) => {
     //     if (err) { return next(err); }
