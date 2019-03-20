@@ -145,6 +145,7 @@ app.post('/post/new', postController.postNewPost);
 // app.post('/post/edit', postController.postEditPost);
 // app.get('/post/delete', postController.getDeletePost);
 // app.post('/post/delete', postController.postDeletePost);
+app.get('/blog', postController.getBlog);
 app.get('/blog/:id', postController.getBlog);
 app.get('/contact', contactController.getContact);
 app.post('/contact', contactController.postContact);

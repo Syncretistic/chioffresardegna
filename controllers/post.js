@@ -9,11 +9,15 @@ exports.getBlog = (req, res) => {
         res.redirect('/');
     }
     const userId = (req.params.id) ? req.params.id : req.user.id;
-    Post.find({author: userId})
-
-    res.render('blog', {
-        title: 'User Blog',
-        userBlog,
+    Post.find({author: userId}, function(err,data){
+        if (err) {
+            console.log(err);
+        }
+        else {
+            res.render('userblog', {
+                userBlog: data,
+            });
+        }
     });
 };
 
